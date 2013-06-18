@@ -50,7 +50,7 @@ public class ToDoListActivity extends Activity {
 					{   
 						todoItems.add(0, myEditText.getText().toString() );
 						aa.notifyDataSetChanged();
-						myEditText.setText("");
+						myEditText.setText("");   
 						return true;
 					}
 				}
