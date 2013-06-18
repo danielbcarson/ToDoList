@@ -47,7 +47,7 @@ public class ToDoListActivity extends Activity {
 				{
 					if ( ( keyCode == KeyEvent.KEYCODE_DPAD_DOWN ) || 
 						 ( keyCode == KeyEvent.KEYCODE_ENTER)	)
-					{
+					{   
 						todoItems.add(0, myEditText.getText().toString() );
 						aa.notifyDataSetChanged();
 						myEditText.setText("");
