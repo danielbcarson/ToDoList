@@ -3,61 +3,42 @@ package com.paad.todolist;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnKeyListener;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
 
-public class ToDoListActivity extends Activity {
-
+public class ToDoListActivity extends Activity implements OnNewItemAddedListener{
+    
+	// list of To Do Items
+	private ArrayList<String> todoItems;;
+	// list adapter
+	private ArrayAdapter<String> aa;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+                
+        // create the array list of To Do Items
+        todoItems = new ArrayList<String>();
         
-        // get references to UI Widgets
-        ListView myListView = (ListView)findViewById(R.id.myListView);
-        final EditText myEditText = (EditText)findViewById(R.id.myEditText);
+        // get reference to the fragment manager
+        FragmentManager fm = getFragmentManager();
         
-        // array list for To Do Item strings
-        final ArrayList<String> todoItems = new ArrayList<String>();
-        
-        // list adapter
-        final ArrayAdapter<String> aa;
-        
+        // get reference to the ToDoListFragment
+        ToDoListFragment todoListFragment = 
+        		(ToDoListFragment)fm.findFragmentById(R.id.TodoListFragment);
+               
         // bind the list to the adapter
         aa = new ArrayAdapter<String>(this, 
         		                      android.R.layout.simple_list_item_1, 
         		                      todoItems );
         
         // bind the array adapter to the list view
-        myListView.setAdapter(aa);
+        todoListFragment.setListAdapter(aa);
         
-        // attach a hey listener to the EditText control
-        myEditText.setOnKeyListener( new OnKeyListener() {
-			
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				
-				if ( event.getAction() == KeyEvent.ACTION_DOWN) 
-				{
-					if ( ( keyCode == KeyEvent.KEYCODE_DPAD_DOWN ) || 
-						 ( keyCode == KeyEvent.KEYCODE_ENTER)	)
-					{   
-						todoItems.add(0, myEditText.getText().toString() );
-						aa.notifyDataSetChanged();
-						myEditText.setText("");   
-						return true;
-					}
-				}
-				return false;
-			}
-		});
-    }
+   }
 
 
     @Override
@@ -66,5 +47,12 @@ public class ToDoListActivity extends Activity {
         getMenuInflater().inflate(R.menu.to_do_list, menu);
         return true;
     }
+
+
+	@Override
+	public void onNewItemAdded(String newItem) {
+		todoItems.add(0, newItem );
+		aa.notifyDataSetChanged();
+	}
     
 }
