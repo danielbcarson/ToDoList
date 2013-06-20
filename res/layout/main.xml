@@ -5,18 +5,16 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
     
-    <EditText
-		android:id="@+id/myEditText"
+    <fragment android:name="com.paad.todolist.NewItemFragment"
+		android:id="@+id/NewItemFragment"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="@string/addItemHint"
-        android:contentDescription="@string/addItemContentDescription"
     />
 
-    <ListView
+    <fragment android:name="com.paad.todolist.ToDoListFragment"
+        android:id="@+id/TodoListFragment"        
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/myListView" 
     />
 
 </LinearLayout>
