@@ -29,10 +29,12 @@ public class ToDoListActivity extends Activity implements OnNewItemAddedListener
         // get reference to the ToDoListFragment
         ToDoListFragment todoListFragment = 
         		(ToDoListFragment)fm.findFragmentById(R.id.TodoListFragment);
-               
+        
+        int resID = R.layout.todolist_item;
+        
         // bind the list to the adapter
         aa = new ArrayAdapter<String>(this, 
-        		                      android.R.layout.simple_list_item_1, 
+        		                      resID, 
         		                      todoItems );
         
         // bind the array adapter to the list view
