@@ -36,7 +36,7 @@ public class NewItemFragment extends Fragment {
 						 ( keyCode == KeyEvent.KEYCODE_ENTER)	)
 					{   
 						onNewItemAddedListener.onNewItemAdded( 
-								myEditText.getText().toString());
+								new ToDoItem(myEditText.getText().toString()));
 						myEditText.setText("");   
 						return true;
 					}

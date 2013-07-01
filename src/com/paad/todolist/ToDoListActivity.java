@@ -11,9 +11,9 @@ import android.widget.ArrayAdapter;
 public class ToDoListActivity extends Activity implements OnNewItemAddedListener{
     
 	// list of To Do Items
-	private ArrayList<String> todoItems;;
-	// list adapter
-	private ArrayAdapter<String> aa;
+	private ArrayList<ToDoItem> todoItems;
+	// custom list adapter
+	private ToDoItemAdapter aa;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class ToDoListActivity extends Activity implements OnNewItemAddedListener
         setContentView(R.layout.main);
                 
         // create the array list of To Do Items
-        todoItems = new ArrayList<String>();
+        todoItems = new ArrayList<ToDoItem>();
         
         // get reference to the fragment manager
         FragmentManager fm = getFragmentManager();
@@ -33,9 +33,9 @@ public class ToDoListActivity extends Activity implements OnNewItemAddedListener
         int resID = R.layout.todolist_item;
         
         // bind the list to the adapter
-        aa = new ArrayAdapter<String>(this, 
-        		                      resID, 
-        		                      todoItems );
+        aa = new ToDoItemAdapter(this, 
+        		                 resID, 
+        		                 todoItems );
         
         // bind the array adapter to the list view
         todoListFragment.setListAdapter(aa);
@@ -52,7 +52,7 @@ public class ToDoListActivity extends Activity implements OnNewItemAddedListener
 
 
 	@Override
-	public void onNewItemAdded(String newItem) {
+	public void onNewItemAdded(ToDoItem newItem) {
 		todoItems.add(0, newItem );
 		aa.notifyDataSetChanged();
 	}

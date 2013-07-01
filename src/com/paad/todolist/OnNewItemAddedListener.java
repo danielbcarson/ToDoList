@@ -1,5 +1,5 @@
 package com.paad.todolist;
 
 public interface OnNewItemAddedListener {
-	public void onNewItemAdded( String newItem );
+	public void onNewItemAdded( ToDoItem newItem );
 }
